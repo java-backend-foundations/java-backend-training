@@ -14,5 +14,5 @@ import java.util.List;
 public interface TaskItemRepository extends JpaRepository<TaskItemEntity, Long> {
 
     @Query("SELECT item FROM TaskItemEntity item WHERE item.deadline < :deadline")
-    List<TaskItemEntity> findByDeadline(@Param("deadline") Instant deadline);
+    List<TaskItemEntity> findByDeadlineBefore(@Param("deadline") Instant deadline);
 }
