@@ -1,18 +1,13 @@
 package com.capgemini.training.todo.task.dataaccess.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import java.util.List;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
+@Table(name = "TASK_LIST")
 @Setter
 @Getter
 public class TaskListEntity {
@@ -20,6 +15,9 @@ public class TaskListEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Version
+    private int version;
 
     private String name;
 
