@@ -1,11 +1,9 @@
 package com.capgemini.training.todo.task.common;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
-import lombok.Data;
 
-@Data
 @Builder
-public class TaskListEto  {
-    private Long id;
-    private String name;
-}
+public record TaskListEto  (Long id,
+                            @NotNull @Size(min = 5) String name) { }

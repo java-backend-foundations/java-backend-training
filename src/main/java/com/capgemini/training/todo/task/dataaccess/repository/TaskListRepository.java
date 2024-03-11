@@ -14,7 +14,6 @@ import java.util.Optional;
 @Repository
 public interface TaskListRepository extends JpaRepository<TaskListEntity, Long> {
 
-    //wszyszukiwać TaskListy po nazwie
     Optional<TaskListEntity> findFirstByName(String name);
 
     List<TaskListEntity> findAllByName(String name);

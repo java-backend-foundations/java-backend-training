@@ -23,7 +23,6 @@ import java.util.Objects;
 @Repository
 public interface TaskItemRepository extends JpaRepository<TaskItemEntity, Long> {
 
-    //i taski, po completed i po dacie (by można było sobie znaleźć np. nieskonczone z przekrczonym terminem)
     @Query("SELECT item FROM TaskItemEntity item WHERE item.deadline < :deadline")
     List<TaskItemEntity> findByDeadlineBefore(@Param("deadline") Instant deadline);
 
