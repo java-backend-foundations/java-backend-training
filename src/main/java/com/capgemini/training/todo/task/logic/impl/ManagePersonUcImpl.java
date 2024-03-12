@@ -36,7 +36,7 @@ public class ManagePersonUcImpl implements ManagePersonUc {
     public PersonEto savePerson(@Valid PersonEto personEto) {
 
         PersonEntity personEntity = personMapper.toPersonEntity(personEto);
-        personEntity = personRepository.save(personEntity);
+        personEntity = personRepository.saveAndFlush(personEntity);
         return personMapper.toPersonEto(personEntity);
     }
 
@@ -47,10 +47,10 @@ public class ManagePersonUcImpl implements ManagePersonUc {
         TaskListEntity taskListEntity = taskListMapper.toTaskListEntity(personCto.taskListEto());
 
         // No cascade type was defined for the relation, so we have to handle it manually
-        taskListEntity = taskListRepository.save(taskListEntity);
+        taskListEntity = taskListRepository.saveAndFlush(taskListEntity);
         personEntity.setTaskList(taskListEntity);
 
-        personEntity = personRepository.save(personEntity);
+        personEntity = personRepository.saveAndFlush(personEntity);
         return PersonCto.builder()
                 .personEto(personMapper.toPersonEto(personEntity))
                 .taskListEto(taskListMapper.toTaskListEto(personEntity.getTaskList()))

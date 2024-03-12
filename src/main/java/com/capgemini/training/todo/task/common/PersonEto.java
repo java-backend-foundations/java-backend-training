@@ -6,4 +6,5 @@ import lombok.Builder;
 
 @Builder
 public record PersonEto(Long id,
+                        int version,
                         @NotNull @Email String email) { }

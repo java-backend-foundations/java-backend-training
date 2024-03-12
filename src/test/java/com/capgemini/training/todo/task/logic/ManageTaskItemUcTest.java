@@ -69,7 +69,7 @@ class ManageTaskItemUcTest {
         // given
         TaskItemEto taskItemEto = TaskItemEto.builder().name(DEFAULT_NAME).deadline(Instant.now()).build();
         taskItemEto = manageTaskItemUc.saveTaskItem(taskItemEto);
-        taskItemEto = TaskItemEto.builder().id(taskItemEto.id()).name(UPDATED_NAME).completed(true).build();
+        taskItemEto = TaskItemEto.builder().id(taskItemEto.id()).version(taskItemEto.version()).name(UPDATED_NAME).completed(true).build();
 
         // when
         TaskItemEto result = manageTaskItemUc.saveTaskItem(taskItemEto);

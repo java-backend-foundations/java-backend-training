@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -59,7 +61,7 @@ class ManagePersonUcTest {
         // given
         PersonEto personEto = PersonEto.builder().email(DEFAULT_EMAIL).build();
         personEto = managePersonUc.savePerson(personEto);
-        personEto = PersonEto.builder().id(personEto.id()).email(UPDATED_EMAIL).build();
+        personEto = PersonEto.builder().id(personEto.id()).version(personEto.version()).email(UPDATED_EMAIL).build();
 
         // when
         PersonEto result = managePersonUc.savePerson(personEto);

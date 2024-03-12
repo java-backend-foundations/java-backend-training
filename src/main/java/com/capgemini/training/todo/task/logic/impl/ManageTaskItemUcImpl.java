@@ -29,7 +29,7 @@ public class ManageTaskItemUcImpl implements ManageTaskItemUc {
     public TaskItemEto saveTaskItem(@Valid TaskItemEto taskItemEto) {
 
         TaskItemEntity taskItemEntity = taskItemMapper.toTaskItemEntity(taskItemEto);
-        taskItemEntity = taskItemRepository.save(taskItemEntity);
+        taskItemEntity = taskItemRepository.saveAndFlush(taskItemEntity);
         return taskItemMapper.toTaskItemEto(taskItemEntity);
     }
 

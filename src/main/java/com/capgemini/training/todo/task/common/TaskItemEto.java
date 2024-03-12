@@ -8,6 +8,7 @@ import java.time.Instant;
 
 @Builder
 public record TaskItemEto(Long id,
+                          int version,
                           @NotNull @Size(min = 2, max = 40) String name,
                           boolean completed,
                           Instant deadline) { }

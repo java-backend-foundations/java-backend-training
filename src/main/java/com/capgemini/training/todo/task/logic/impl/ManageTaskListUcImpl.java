@@ -42,7 +42,7 @@ public class ManageTaskListUcImpl implements ManageTaskListUc {
         taskListEntity.setItems(taskListCto.taskItemEtos().stream().map(taskItemMapper::toTaskItemEntity).toList());
         taskListEntity.getItems().forEach(taskItemEntity -> taskItemEntity.setTaskList(taskListEntity));
 
-        TaskListEntity result = taskListRepository.save(taskListEntity);
+        TaskListEntity result = taskListRepository.saveAndFlush(taskListEntity);
         return toTaskListCto(result);
     }
 
@@ -62,7 +62,7 @@ public class ManageTaskListUcImpl implements ManageTaskListUc {
                 i -> createItemForIndex(i, taskListEntity)).toList();
         taskListEntity.setItems(items);
 
-        TaskListEntity result = taskListRepository.save(taskListEntity);
+        TaskListEntity result = taskListRepository.saveAndFlush(taskListEntity);
         return toTaskListCto(result);
     }
 
