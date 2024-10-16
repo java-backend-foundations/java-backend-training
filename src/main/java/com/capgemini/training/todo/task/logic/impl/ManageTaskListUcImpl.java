@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -36,6 +37,7 @@ public class ManageTaskListUcImpl implements ManageTaskListUc {
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_MAINTAINER)")
     public TaskListCto saveTaskList(@Valid TaskListCto taskListCto) {
 
         TaskListEntity taskListEntity = taskListMapper.toTaskListEntity(taskListCto.taskListEto());
@@ -47,11 +49,13 @@ public class ManageTaskListUcImpl implements ManageTaskListUc {
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_MAINTAINER)")
     public void deleteTaskList(@NotNull Long id) {
         taskListRepository.deleteById(id);
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_MAINTAINER)")
     public TaskListCto createTaskListForGivenName(
             @NotNull @Size(min = 5) String taskListName,
             @Min(value = 0) int numberOfItems) {

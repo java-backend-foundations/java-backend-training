@@ -3,6 +3,7 @@ package com.capgemini.training.todo.task.logic;
 import com.capgemini.training.todo.task.common.PersonCto;
 import com.capgemini.training.todo.task.common.PersonEto;
 import com.capgemini.training.todo.task.common.TaskListEto;
+import com.capgemini.training.todo.task.config.security.AccessControl;
 import com.capgemini.training.todo.task.dataaccess.entity.PersonEntity;
 import com.capgemini.training.todo.task.dataaccess.repository.PersonRepository;
 import jakarta.validation.ConstraintViolationException;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
+@WithMockUser(username = "test", roles = AccessControl.ROLE_ADMIN)
 class ManagePersonUcTest {
 
     private static final String DEFAULT_EMAIL = "some@email.com";

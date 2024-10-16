@@ -1,12 +1,14 @@
 package com.capgemini.training.todo.task.logic;
 
 import com.capgemini.training.todo.task.common.*;
+import com.capgemini.training.todo.task.config.security.AccessControl;
 import com.capgemini.training.todo.task.dataaccess.repository.TaskItemRepository;
 import com.capgemini.training.todo.task.dataaccess.repository.TaskListRepository;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.time.Instant;
 import java.util.List;
@@ -15,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@WithMockUser(username = "test", roles = AccessControl.ROLE_MAINTAINER)
 class ManageTaskListUcTest {
 
     private static final String DEFAULT_TASK_LIST_NAME = "Default Name";

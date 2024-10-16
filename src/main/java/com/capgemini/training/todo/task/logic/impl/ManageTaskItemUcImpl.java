@@ -7,6 +7,7 @@ import com.capgemini.training.todo.task.logic.ManageTaskItemUc;
 import com.capgemini.training.todo.task.logic.mapper.TaskItemMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -26,6 +27,7 @@ public class ManageTaskItemUcImpl implements ManageTaskItemUc {
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_MAINTAINER)")
     public TaskItemEto saveTaskItem(@Valid TaskItemEto taskItemEto) {
 
         TaskItemEntity taskItemEntity = taskItemMapper.toTaskItemEntity(taskItemEto);
@@ -34,6 +36,7 @@ public class ManageTaskItemUcImpl implements ManageTaskItemUc {
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_MAINTAINER)")
     public void deleteTaskItem(@NotNull Long id) {
 
         taskItemRepository.deleteById(id);

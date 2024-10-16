@@ -11,6 +11,7 @@ import com.capgemini.training.todo.task.logic.mapper.PersonMapper;
 import com.capgemini.training.todo.task.logic.mapper.TaskListMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -33,6 +34,7 @@ public class ManagePersonUcImpl implements ManagePersonUc {
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_ADMIN)")
     public PersonEto savePerson(@Valid PersonEto personEto) {
 
         PersonEntity personEntity = personMapper.toPersonEntity(personEto);
@@ -41,6 +43,7 @@ public class ManagePersonUcImpl implements ManagePersonUc {
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_ADMIN)")
     public PersonCto savePerson(@Valid PersonCto personCto) {
 
         PersonEntity personEntity = personMapper.toPersonEntity(personCto.personEto());
@@ -58,6 +61,7 @@ public class ManagePersonUcImpl implements ManagePersonUc {
     }
 
     @Override
+    @PreAuthorize("hasRole(@Roles.ROLE_ADMIN)")
     public void deletePerson(@NotNull Long id) {
 
         personRepository.deleteById(id);
