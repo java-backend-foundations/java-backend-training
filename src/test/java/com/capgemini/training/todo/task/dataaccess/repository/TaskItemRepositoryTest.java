@@ -9,6 +9,7 @@ import java.util.List;
 import com.capgemini.training.todo.task.dataaccess.repository.criteria.TaskItemCriteria;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -23,6 +24,11 @@ class TaskItemRepositoryTest {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@BeforeEach
+	void setup() {
+		taskItemRepository.deleteAll();
+	}
 
 	@Test
 	void testByCriteria(){
